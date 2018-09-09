@@ -1,0 +1,11 @@
+.App {
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  margin: auto;
+  /*position: relative;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #426e86;
+}
