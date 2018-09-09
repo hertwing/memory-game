@@ -3,6 +3,7 @@
 	/*padding: 1% 0;*/
 	width: 100%;
 	text-align: center;
-	background-color: #2f3131;
+	/*background-color: #febf5e;*/
+	background-image: linear-gradient(to bottom right, #f9ba32, orange);
 	color: white;
 }

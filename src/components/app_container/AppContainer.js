@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./AppContainer.css";
 
+import Tappable from "react-tappable";
+
 let plateValue = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6];
 
 let randomPlateValues = [];
@@ -19,7 +21,7 @@ class AppContainer extends Component {
 	state = {
 		plates: [],
 		valueToShow: [],
-		hoverOpacity: 0.3,
+		hoverOpacity: 0.1,
 		isclicked: 0
 	};
 
@@ -47,10 +49,10 @@ class AppContainer extends Component {
 			() =>
 				this.setState(state => ({
 					plates: randomPlateValues.map((randomValue, key) => (
-						<div
+						<Tappable
 							className="Plate"
 							key={key}
-							onClick={
+							onTap={
 								unclickable[key] || this.state.isclicked
 									? null
 									: e => this.handlePlateClick(key)
@@ -80,20 +82,19 @@ class AppContainer extends Component {
 										  }
 								}
 							/>
-						</div>
+						</Tappable>
 					))
 				}))
 		);
 	};
 
 	handlePlateClick = key => {
-		currTarget = key;
 		this.setState(
 			state => ({
 				isclicked: 1
 			}),
 			() => {
-				// if (currTarget !== prevTarget || clicks === 0) {
+				currTarget = key;
 				if (currTarget !== prevTarget) {
 					if (clicks < 2) {
 						const tmpArray = this.state.valueToShow.slice();
@@ -120,31 +121,75 @@ class AppContainer extends Component {
 						pairs++;
 						if (pairs === 6) {
 							setTimeout(() => {
-								alert("Game Over!");
+								if (
+									window.confirm(
+										"Congratulations!\nYour score: " +
+											this.props.points +
+											"\nPlay again?"
+									)
+								) {
+									this.playAgain();
+								} else {
+								}
 							}, 50);
 						}
+						this.props.changePoints(50);
 						return;
 					}
 					clicks++;
 					if (clicks === 2) {
-						currTarget = -1;
-						prevTarget = -2;
-						setTimeout(() => {
-							this.setState(
-								state => ({
-									valueToShow: [],
-									isclicked: 0
-								}),
-								() => this.drawPlates()
-							);
-						}, 750);
-						setTimeout(() => {
-							clicks = 0;
-						}, 750);
+						if (
+							randomPlateValues[currTarget] !==
+								randomPlateValues[prevTarget] &&
+							this.props.points
+						)
+							this.props.changePoints(-10);
+						this.setState(
+							state => ({
+								isclicked: 1
+							}),
+							() => {
+								setTimeout(() => {
+									this.setState(
+										state => ({
+											valueToShow: [],
+											isclicked: 0
+										}),
+										() => this.drawPlates()
+									);
+								}, 750);
+								setTimeout(() => {
+									clicks = 0;
+								}, 750);
+								currTarget = -1;
+								prevTarget = -2;
+								return;
+							}
+						);
 					}
-					prevTarget = currTarget;
 				}
+				prevTarget = currTarget;
 			}
+		);
+	};
+
+	playAgain = () => {
+		plateValue = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6];
+		randomPlateValues = [];
+		clicks = 0;
+		currTarget = -1;
+		prevTarget = -2;
+		unclickable = [];
+		pairs = 0;
+		this.props.changePoints(0 - this.props.points);
+		this.setState(
+			state => ({
+				plates: [],
+				valueToShow: [],
+				hoverOpacity: 0.1,
+				isclicked: 0
+			}),
+			() => this.generatePlates()
 		);
 	};
 

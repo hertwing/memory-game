@@ -1,11 +1,27 @@
+.App-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+/*.App-background-opacity {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}*/
+
 .App {
   width: 100%;
   max-width: 1400px;
   height: 100%;
   margin: auto;
-  /*position: relative;*/
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #426e86;
+  background-color: rgba(0, 0, 0, 0.5);
+  /*background-color: #426e86;*/
 }

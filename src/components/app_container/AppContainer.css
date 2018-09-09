@@ -1,9 +1,9 @@
 .App-container {
+	z-index: 2;
 	width: 70%;
 	margin-left: 15%;
 	margin-right: 15%;
 	padding: 1%;
-	/*margin-bottom: 20px;*/
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -17,9 +17,10 @@
 	padding-top: 20%;
 	margin: 1% 0;
 	text-align: center;
-	background-color: #f9ba32;
+	background-image: linear-gradient(to bottom right, #f9ba32, orange);
 	border-radius: 15px;
-	box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
+	cursor: pointer;
 }
 
 .Plate-hover {
@@ -29,18 +30,14 @@
 	right: 0;
 	bottom: 0;
 	display: none;
-	z-index: 1;
+	z-index: 3;
 	background-color: rgb(0, 0, 0);
 	border-radius: 15px;
 }
 
-.Plate:hover .Plate-hover {
-	display: block;
-}
-
 .Image {
-	z-index: 1;
-	border-radius: 15px;
+	z-index: 4;
+	border-radius: 13px;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -49,4 +46,18 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+	.App-container {
+		width: 96%;
+		margin: 0;
+		padding: 2%;
+	}
+}
+
+@media only screen and (min-width: 1001px) {
+	.Plate:hover .Plate-hover {
+		display: block;
+	}
 }
