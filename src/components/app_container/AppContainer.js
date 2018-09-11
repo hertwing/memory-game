@@ -66,14 +66,16 @@ class AppContainer extends Component {
 								className="Image"
 								style={
 									!unclickable[key]
-										? {
-												backgroundImage:
-													"url(./imgs/" +
-													this.state.valueToShow[
-														key
-													] +
-													".jpg)"
-										  }
+										? this.state.valueToShow[key]
+											? {
+													backgroundImage:
+														"url(./imgs/" +
+														this.state.valueToShow[
+															key
+														] +
+														".jpg)"
+											  }
+											: null
 										: {
 												backgroundImage:
 													"url(./imgs/" +
