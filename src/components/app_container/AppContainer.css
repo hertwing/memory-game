@@ -1,6 +1,7 @@
 .App-container {
 	z-index: 2;
 	width: 70%;
+	min-height: 70%;
 	margin-left: 15%;
 	margin-right: 15%;
 	padding: 1%;
@@ -13,8 +14,8 @@
 
 .Plate {
 	position: relative;
+	min-height: 24%;
 	width: 24%;
-	padding-top: 20%;
 	margin: 1% 0;
 	text-align: center;
 	background-image: linear-gradient(to bottom right, #f9ba32, orange);
@@ -53,6 +54,7 @@
 		width: 96%;
 		margin: 0;
 		padding: 2%;
+		min-height: 60%;
 	}
 }
 
